@@ -1,7 +1,8 @@
 import express from "express";
 import routes from "./routes";
-import { httpLogger } from "./middlewares/httpLogger";
+import { httpLogger } from "./middlewares/http.logger";
 import { invalidJsonFormat } from "./middlewares/validate";
+
 
 const app = express();
 

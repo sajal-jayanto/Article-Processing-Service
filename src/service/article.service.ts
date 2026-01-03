@@ -1,6 +1,7 @@
 import { Article, JobAnalysis, JobStatus } from "../@types/article"
 import { v4 as uuidv4 } from 'uuid';
 import { RedisService } from "../redis/redis.service";
+import { articleTaskQueue } from "../lib/queue";
 
 export class ArticleService {
 
@@ -8,7 +9,7 @@ export class ArticleService {
     const jobId = uuidv4();
     const currentCacheType = await RedisService.get('cacheType');
     RedisService.set(jobId, { jobId, status: JobStatus.Processing, cacheType: currentCacheType });
-
+    await articleTaskQueue.add(jobId, articles);
     return jobId
   }
 

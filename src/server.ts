@@ -1,6 +1,7 @@
 import app from "./app";
 import dotenv from "dotenv";
 import { initRedis } from "./redis/redis.init";
+import { startArticleTaskWorker } from "./service/article.worker.service";
 
 dotenv.config();
 
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 const startServer = async () => {
   try {
     await initRedis();
+    startArticleTaskWorker();
     app.listen(PORT, () => {
       console.log(`Server running on port: ${PORT}`);
     });
