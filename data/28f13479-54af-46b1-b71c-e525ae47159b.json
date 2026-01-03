@@ -1,0 +1,113 @@
+[
+  {
+    "jobId": "28f13479-54af-46b1-b71c-e525ae47159b",
+    "status": "completed",
+    "analysis": {
+      "wordCount": 25,
+      "sentenceCount": 5,
+      "paragraphCount": 1,
+      "longestWord": "single-threaded",
+      "uniqueWords": [
+        "Nodejs",
+        "uses",
+        "an",
+        "event-driven",
+        "non-blocking",
+        "IO",
+        "model",
+        "This",
+        "makes",
+        "it",
+        "lightweight",
+        "and",
+        "efficient",
+        "The",
+        "event",
+        "loop",
+        "allows",
+        "to",
+        "perform",
+        "operations",
+        "despite",
+        "being",
+        "single-threaded"
+      ]
+    }
+  },
+  {
+    "jobId": "28f13479-54af-46b1-b71c-e525ae47159b",
+    "status": "completed",
+    "analysis": {
+      "wordCount": 26,
+      "sentenceCount": 2,
+      "paragraphCount": 1,
+      "longestWord": "interchangeable",
+      "uniqueWords": [
+        "Design",
+        "patterns",
+        "are",
+        "reusable",
+        "solutions",
+        "to",
+        "common",
+        "problems",
+        "in",
+        "software",
+        "design",
+        "The",
+        "Strategy",
+        "pattern",
+        "defines",
+        "a",
+        "family",
+        "of",
+        "algorithms",
+        "encapsulates",
+        "each",
+        "one",
+        "and",
+        "makes",
+        "them",
+        "interchangeable"
+      ]
+    }
+  },
+  {
+    "jobId": "28f13479-54af-46b1-b71c-e525ae47159b",
+    "status": "completed",
+    "analysis": {
+      "wordCount": 26,
+      "sentenceCount": 2,
+      "paragraphCount": 1,
+      "longestWord": "asynchronous",
+      "uniqueWords": [
+        "Promises",
+        "represent",
+        "the",
+        "eventual",
+        "completion",
+        "or",
+        "failure",
+        "of",
+        "an",
+        "asynchronous",
+        "operation",
+        "They",
+        "provide",
+        "cleaner",
+        "syntax",
+        "compared",
+        "to",
+        "callbacks",
+        "and",
+        "are",
+        "essential",
+        "for",
+        "writing",
+        "modern",
+        "JavaScript",
+        "code"
+      ]
+    }
+  }
+]

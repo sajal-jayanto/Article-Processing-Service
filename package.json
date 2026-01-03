@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "start": "node dist/server.js",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "cache:memory": "redis-cli SET storeType inMemoryCache",
+    "cache:file": "redis-cli SET storeType fileBasedCache"
   },
   "keywords": [],
   "author": "",

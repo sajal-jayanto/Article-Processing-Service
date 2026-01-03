@@ -4,12 +4,16 @@ export interface Article {
   content: string;
 }
 
+export interface AnalysisState {
+  status: string;
+  storeType: string;
+  data?: any;
+}
 
 export interface JobAnalysis {
   jobId: string,
   status: string,
-  cacheType: string,
-  analysis?: {
+  analysis: {
     wordCount: number,
     sentenceCount: number,
     paragraphCount: number,
@@ -22,4 +26,12 @@ export enum JobStatus {
   Processing = "processing",
   Completed = "completed",
   Failed = "failed",
+}
+
+export interface TextAnalysis {
+  wordCount: number;
+  sentenceCount: number;
+  paragraphCount: number;
+  longestWord: string;
+  uniqueWords: string[];
 }
