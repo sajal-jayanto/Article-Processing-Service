@@ -17,19 +17,13 @@ export const startArticleTaskWorker = () => {
     const result: JobAnalysis[] = []
     const articles = job.data as Article[];
     articles.forEach(article => {
-      const analyzeResult = ArticleService.analyzeArticles(article.content);
-      result.push({
-        jobId: job.name,
-        status: JobStatus.Completed,
-        analysis: {
-          ...analyzeResult
-        }
-      })
+      const analyze = ArticleService.analyzeArticles(article.content);
+      result.push({ jobId: job.name, status: JobStatus.Completed, analysis: analyze })
     });
-    return result;
+    await ArticleService.storeArticles(job.name, result);
   }, bullMqConfig);
 
-  worker.on('completed', async (job, result) => await ArticleService.storeArticles(job.name, result));
+  worker.on('completed', (job) => console.log(`Job ${job.name} is completed.`));
   worker.on('failed', (job, err) => console.error(`Job ${job?.name} failed: ${err.message}`));
 
   console.log('Article task worker is listening for tasks...');

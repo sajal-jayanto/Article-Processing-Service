@@ -17,30 +17,23 @@ export class ArticleService {
   }
 
   static findArticles = async (jobId: string) => {
+    const fileName = jobId.concat(".json");
+    const filePath = path.join(process.cwd(), "data", fileName);
+    const exists = await fs.access(filePath).then(() => true).catch(() => false);
+    if (exists) {
+      const fileData = await fs.readFile(filePath, "utf-8");
+      return JSON.parse(fileData);
+    }
+
     const rawValue = await RedisService.get(jobId);
     if (!rawValue) {
-      return { status: "not_found" };
+      throw new Error("JobId not found.");
     }
-
-    const { status, storeType, data: jobAnalysis } = rawValue as AnalysisState;
+    const { status, data } = rawValue as AnalysisState;
     if (status === JobStatus.Processing) {
-      return { status: "processing" }
+      return { status: JobStatus.Processing }
     }
-
-    if (storeType === "inMemoryCache" && jobAnalysis) {
-      return jobAnalysis;
-    } else if (storeType === "fileBasedCache") {
-      try {
-        const fileName = jobId.concat(".json");
-        const filePath = path.join(process.cwd(), "data", fileName);
-        const fileData = await fs.readFile(filePath, "utf-8");
-        const jsonData = JSON.parse(fileData);
-        return jsonData;
-      } catch (err) {
-        return { status: "not_found" };
-      }
-    }
-    return { status: "not_found" };
+    return data;
   }
 
   static analyzeArticles = (text: string) => {
@@ -78,17 +71,16 @@ export class ArticleService {
     }
     const { storeType } = rawValue as AnalysisState;
     if (storeType === "inMemoryCache") {
-      RedisService.set(jobId, { status: JobStatus.Completed, data, storeType }, 300);
-    } else if (storeType === "fileBasedCache") {
-      try {
-        const projectRoot = process.cwd();
-        const folderPath = path.join(projectRoot, "data");
-        const fileName = jobId.concat(".json");
-        await saveJSONToFile(data, folderPath, fileName);
-        RedisService.set(jobId, { status: JobStatus.Completed, storeType });
-      } catch (err: any) {
-        throw new Error(err.message);
-      }
+      RedisService.set(jobId, { status: JobStatus.Completed, data }, 300);
+      return;
+    }
+    const projectRoot = process.cwd();
+    const folderPath = path.join(projectRoot, "data");
+    const fileName = jobId.concat(".json");
+    try {
+      await saveJSONToFile(data, folderPath, fileName);
+    } catch (err: any) {
+      throw new Error(err.message);
     }
   }
 }
