@@ -18,4 +18,13 @@ export class RedisService {
   static async del(key: string) {
     await redis.del(key);
   }
+
+  static async incr(key: string, increment = 1, defaultValue = 0): Promise<number> {
+    const exists = await redis.exists(key);
+    if (!exists) {
+      await redis.set(key, defaultValue);
+    }
+    const newValue = await redis.incrby(key, increment);
+    return newValue;
+  }
 }

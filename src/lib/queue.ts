@@ -10,7 +10,7 @@ export const bullMqRedisConnection: ConnectionOptions = {
 export const articleTaskQueue = new Queue(QueueList.ARTICLE_TASK_QUEUE, {
   connection: bullMqRedisConnection,
   defaultJobOptions: {
-    attempts: Number(process.env.ARTICLE_TASK_RETRIES) || 3,
+    attempts: Number(process.env.TASK_RETRIES) || 3,
     backoff: { type: 'exponential', delay: 5000 },
     removeOnComplete: true,
   },
