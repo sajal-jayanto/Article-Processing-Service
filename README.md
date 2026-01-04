@@ -91,3 +91,15 @@ POST /api/articles
 ```http
 GET /api/articles/:jobId
 ```
+
+#### change InMemoryCache
+
+```bash
+cache:set:memory
+```
+
+#### change fileBasedCache
+
+```bash
+cache:set:file
+```
