@@ -67,10 +67,8 @@ This will start project
 ```md
 # 📘 API Documentation – Article Processing Service
 
-Base URL:
+Base URL: http://localhost:3000
 ```
-
-[http://localhost:3000](http://localhost:3000)
 
 ```http
 GET /health
