@@ -7,8 +7,10 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
-    "cache:set:memory": "npm run build && node dist/scripts/setCacheType.js inMemoryCache",
-    "cache:set:file": "npm run build && node dist/scripts/setCacheType.js fileBasedCache"
+    "cache:set:memory": "node dist/scripts/setCacheType.js inMemoryCache",
+    "cache:set:file": "node dist/scripts/setCacheType.js fileBasedCache",
+    "dev:cache:set:memory": "npm run build && node dist/scripts/setCacheType.js inMemoryCache",
+    "dev:cache:set:file": "npm run build && node dist/scripts/setCacheType.js fileBasedCache"
   },
   "keywords": [],
   "author": "",
