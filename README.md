@@ -95,11 +95,11 @@ GET /api/articles/:jobId
 #### change InMemoryCache
 
 ```bash
-cache:set:memory
+npm run cache:set:memory
 ```
 
 #### change fileBasedCache
 
 ```bash
-cache:set:file
+npm run cache:set:file
 ```
